@@ -1,12 +1,23 @@
+import { useState } from 'react';
+import { VISTAS } from './data/vistas';
+import Navbar from './components/layout/Navbar';
+import Tienda from './components/views/Tienda';
+import Checkout from './components/views/Checkout';
+import Confirmacion from './components/views/Confirmacion';
+
 function App() {
+  const [vistaActiva, setVistaActiva] = useState(VISTAS.TIENDA);
+
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 p-8">
-      <h1 className="text-3xl font-bold text-center">GameShop</h1>
-      <p className="text-center text-slate-600 mt-2">
-        Proyecto inicializado con React + Tailwind CSS v4
-      </p>
-    </main>
-  )
+    <div className="min-h-screen bg-slate-50 text-slate-900">
+      <Navbar />
+      <main className="container mx-auto p-4">
+        {vistaActiva === VISTAS.TIENDA && <Tienda setVistaActiva={setVistaActiva} />}
+        {vistaActiva === VISTAS.CHECKOUT && <Checkout setVistaActiva={setVistaActiva} />}
+        {vistaActiva === VISTAS.CONFIRMACION && <Confirmacion setVistaActiva={setVistaActiva} />}
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;
