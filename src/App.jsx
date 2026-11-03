@@ -7,14 +7,25 @@ import Confirmacion from './components/views/Confirmacion';
 
 function App() {
   const [vistaActiva, setVistaActiva] = useState(VISTAS.TIENDA);
+  const [nombreCliente, setNombreCliente] = useState('');
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 transition-colors dark:bg-slate-900 dark:text-slate-100">
       <Navbar setVistaActiva={setVistaActiva} />
       <main className="container mx-auto p-4 sm:p-6 lg:p-8">
         {vistaActiva === VISTAS.TIENDA && <Tienda />}
-        {vistaActiva === VISTAS.CHECKOUT && <Checkout setVistaActiva={setVistaActiva} />}
-        {vistaActiva === VISTAS.CONFIRMACION && <Confirmacion setVistaActiva={setVistaActiva} />}
+        {vistaActiva === VISTAS.CHECKOUT && (
+          <Checkout
+            setVistaActiva={setVistaActiva}
+            setNombreCliente={setNombreCliente}
+          />
+        )}
+        {vistaActiva === VISTAS.CONFIRMACION && (
+          <Confirmacion
+            nombreCliente={nombreCliente}
+            setVistaActiva={setVistaActiva}
+          />
+        )}
       </main>
     </div>
   );
