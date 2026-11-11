@@ -30,7 +30,7 @@ pnpm run dev
 ## Decisiones de estado
 
 * **Buscador de juegos:** vive como un `useState` local dentro de `views/Tienda.jsx`. No se ubicó en un contexto porque ninguna otra vista ni componente fuera de la tienda necesita conocer el término buscado.
-* **Apertura del modal del carrito:** vive como un `useState` local dentro de `Navbar.jsx`.
+* **Apertura del modal del carrito:** vive como un `useState` local dentro de `App.jsx`. Se mantuvo fuera de `Navbar` para evitar que el modal sea hijo del `<header>` y quede atrapado en su stacking context, lo que impedía cerrarlo correctamente.
 * **Totales del carrito:** tanto `total` como `cantidadTotal` se calculan exclusivamente como valores derivados mediante `reduce` dentro de `useCarrito.js`. No son `useState` para evitar estados desincronizados o redundantes.
 * **Campos del formulario:** son controlados al 100% por `react-hook-form` con `register` y `watch`, sin `useState` individuales ni `onChange` manuales.
 

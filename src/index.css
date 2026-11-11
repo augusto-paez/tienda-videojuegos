@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Habilita dark mode por clase (agrega/remueve 'dark' en <html>) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-primary: #6366f1;
   --color-primary-hover: #4f46e5;

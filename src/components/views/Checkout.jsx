@@ -3,7 +3,7 @@ import { useCarritoContext } from '../../context/CarritoContext';
 import { formatearPrecio } from '../../utils/formato';
 import { VISTAS } from '../../data/vistas';
 
-export default function Checkout({ setVistaActiva, setNombreCliente }) {
+export default function Checkout({ setVistaActiva, irAConfirmacion }) {
   const { carrito, total, vaciar } = useCarritoContext();
 
   const {
@@ -22,26 +22,8 @@ export default function Checkout({ setVistaActiva, setNombreCliente }) {
   const metodoEnvio = watch('metodoEnvio');
 
   const onSubmit = (datos) => {
-    // Construcción manual del pedido:
-    // React Hook Form no limpia campos desmontados; se fuerza null para evitar enviar
-    // una dirección cuando el método de envío seleccionado es retiro en local.
-    const pedido = {
-      cliente: {
-        nombre: datos.nombre,
-        email: datos.email,
-        telefono: datos.telefono,
-        direccion: datos.metodoEnvio === 'domicilio' ? datos.direccion : null,
-      },
-      envio: datos.metodoEnvio,
-      notas: datos.notas ? datos.notas : '',
-      items: carrito,
-      total: total,
-    };
-
-    console.log(pedido);
-    setNombreCliente(datos.nombre);
     vaciar();
-    setVistaActiva(VISTAS.CONFIRMACION);
+    irAConfirmacion(datos.nombre);
   };
 
   // Protección: si el carrito está vacío, no se puede continuar en checkout
